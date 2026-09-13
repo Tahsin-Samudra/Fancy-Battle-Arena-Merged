@@ -1,12 +1,12 @@
 #include <GL/glut.h>
 #include <math.h>
+#include <iostream>
+using namespace std;
 
-//sun ray
+// FN-01  //sun ray
 void display1(float x1,float y1, float x2,float y2)
 {
-    //glClear(GL_COLOR_BUFFER_BIT);
-
-
+    //OBJ-01
     float dx= x2-x1;
     float dy= y2-y1;
     float m =dy/dx;
@@ -40,11 +40,11 @@ void display1(float x1,float y1, float x2,float y2)
     glEnd();
     glFlush();
 }
+//FN-02 //sun ray
 void display2(float x3,float y3, float x4,float y4)
 {
-    //glClear(GL_COLOR_BUFFER_BIT);
 
-
+    //OBJ-02
     float dx1= x4-x3;
     float dy1= y4-y3;
     float m =dy1/dx1;
@@ -78,11 +78,11 @@ void display2(float x3,float y3, float x4,float y4)
     glEnd();
     glFlush();
 }
+//FN-03 //sun ray
 void display3(float x5,float y5, float x6,float y6)
 {
-    //glClear(GL_COLOR_BUFFER_BIT);
 
-
+    //OBJ-03
     float dx2= x6-x5;
     float dy2= y6-y5;
     float m =dy2/dx2;
@@ -116,11 +116,10 @@ void display3(float x5,float y5, float x6,float y6)
     glEnd();
     glFlush();
 }
+//FN-04 //sun ray
 void display4(float x7,float y7, float x8,float y8)
 {
-    //glClear(GL_COLOR_BUFFER_BIT);
-
-
+    //OBJ-04
     float dx3= x8-x7;
     float dy3= y8-y7;
     float m =dy3/dx3;
@@ -154,8 +153,10 @@ void display4(float x7,float y7, float x8,float y8)
     glEnd();
     glFlush();
 }
+//FN-05 //3D cube rotating
 void display5()
 {
+    //OBJ-05
     glBegin(GL_QUADS);
     glColor3f(1,0,0);
     glVertex3f(-1, -1, 1);
@@ -199,11 +200,13 @@ void display5()
 float angle16=0;
 float tx=0, ty=0;
 float sx=1, sy=1;
+float hammersx=1, hammersy=1;
 float angle17=0;
 float tx1 =0;
 float thox=0;
 bool thanosVisible= true;
 bool thorVisible = true;
+//FN-06 //All scene
 void display()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -216,8 +219,8 @@ void display()
     glLoadIdentity();
     glDisable(GL_DEPTH_TEST);
 
-    //blue sky
-    glColor3f(0.53,0.80,0.92);
+    //OBJ-06 //blue sky
+    glColor3f(1,0.49,0.31);
     glBegin(GL_QUADS);
 
     glVertex2f(-30,10);
@@ -226,7 +229,17 @@ void display()
     glVertex2f(30,10);
     glEnd();
 
-    //red sun
+    //OBJ-07 // Cave background
+    glColor3f(0.12,0.12,0.12);
+    glBegin(GL_QUADS);
+
+    glVertex2f(-30,-20);
+    glVertex2f(-30,6);
+    glVertex2f(30,6);
+    glVertex2f(30,-20);
+    glEnd();
+
+    //OBJ-08 //red sun
     glColor3f(1,0,0);
     float cX= 20;
     float cY=24;
@@ -241,10 +254,7 @@ void display()
     }
     glEnd();
 
-
-
-
-
+    //OBJ-09 Mountains
     glColor3f(0,0.50,0);
     glBegin(GL_TRIANGLES);
 
@@ -297,10 +307,9 @@ void display()
     glVertex2f(22,10);
     glEnd();
 
-    glColor3f(1,1,1);
-    display1(20, 16, 20, 20);
-    glEnd();
 
+
+    //OBJ-10 //sun rays with line
     glColor3f(1,1,1);
     glLineWidth(3);
     glBegin(GL_LINES);
@@ -335,6 +344,7 @@ void display()
     glVertex2f(26,28.5);
 
     glEnd();
+    //OBJ-11 //Birds
     glColor3f(0,0,0);
     glBegin(GL_POLYGON);
     glVertex2f(-18.0,17.5);
@@ -365,6 +375,7 @@ void display()
     glVertex2f(-2,19.5);
     glEnd();
 
+    //OBJ-12 // clouds with adding circle
     glColor3f(1,1,1);
     float cX1= -21;
     float cY1=26;
@@ -474,6 +485,7 @@ void display()
         glVertex2f(x8,y8);
     }
     glEnd();
+    //OBJ-13 // Wall
     glColor3f(0.50,0,0);
     glBegin(GL_QUADS);
 
@@ -760,6 +772,24 @@ void display()
     glColor3f(0.80,0.36,0.36);
     glBegin(GL_QUADS);
 
+    glVertex2f(-22,-30);
+    glVertex2f(-22,-24);
+    glVertex2f(-26,-24);
+    glVertex2f(-26,-30);
+    glEnd();
+
+    glColor3f(0.54,0,0);
+    glBegin(GL_QUADS);
+
+    glVertex2f(-22,-30);
+    glVertex2f(-22,-24);
+    glVertex2f(-14,-24);
+    glVertex2f(-14,-30);
+    glEnd();
+
+    glColor3f(0.80,0.36,0.36);
+    glBegin(GL_QUADS);
+
     glVertex2f(-18,-30);
     glVertex2f(-18,-24);
     glVertex2f(-14,-24);
@@ -800,6 +830,15 @@ void display()
     glVertex2f(10,-24);
     glVertex2f(18,-24);
     glVertex2f(18,-30);
+    glEnd();
+
+    glColor3f(0.80,0.36,0.36);
+    glBegin(GL_QUADS);
+
+    glVertex2f(22,-30);
+    glVertex2f(22,-24);
+    glVertex2f(26,-24);
+    glVertex2f(26,-30);
     glEnd();
 
     glColor3f(0.64,0.16,0.16);
@@ -867,6 +906,7 @@ void display()
     }
     glEnd();
 
+    //OBJ-14 // rocket
     glColor3f(0.66,0.66,0.66);
     float cX11= 0;
     float cY11=-15.9;
@@ -897,12 +937,14 @@ void display()
     glVertex2f(3,-20);
     glEnd();
 
+    //Thor character
     if(thorVisible)
     {
 
     glLoadIdentity();
     glTranslatef(thox,0,0);
 
+    //OBJ-15 //Thor body
     glColor3f(1,0.89,0.76);
     float cX12= -24.5;
     float cY12=-9.56;
@@ -962,9 +1004,9 @@ void display()
     glTranslatef(tx, ty, 0);
     glTranslatef(-21.8,-11,0);
     glRotatef(angle17,0,0,1);
-    glScalef(sx,sy,1);
+    glScalef(hammersx,hammersy,1);
     glTranslatef(21.8,11,0);
-    //Hammer head
+    //OBJ-16 //Hammer head
     glColor3f(0.60,0.60,0.60);
     glBegin(GL_QUADS);
 
@@ -983,8 +1025,8 @@ void display()
     glVertex2f(-21.6,-12.5);
     glVertex2f(-22.0,-12.5);
     glEnd();
-
     glLoadIdentity();
+
     glTranslatef(thox, 0, 0);
 
     glColor3f(1, 0, 0);
@@ -1022,6 +1064,7 @@ void display()
     {
 
     glLoadIdentity();
+    //OBJ-17 Thanos Body
     glColor3f(0.48,0.40,0.93);
     float cX13= 24.5;
     float cY13=-9.56;
@@ -1075,11 +1118,13 @@ void display()
 
     glLoadIdentity();
     glTranslatef(tx1,0,0);
+    glTranslatef(18.75,-11,0);
     glScalef(sx,sy,1);
+    glTranslatef(-18.75,11,0);
     glColor3f(1,0.84,0);
     glBegin(GL_POLYGON);
 
-    //thanoshand
+    //OBJ-18 //thanoshand
     glVertex2f(20.5,-11);
     glVertex2f(17,-11);
     glVertex2f(17,-13.2);
@@ -1112,10 +1157,10 @@ void display()
     glLoadIdentity();
     glColor3f(1,1,1);
     //sun ray
-    display1(20,16,20,20);
-    display2(12,24,16,24);
-    display3(20,28,20,30);
-    display4(24,24,28,24);
+    display1(20,16,20,20);//OBJ-01
+    display2(12,24,16,24);//OBJ-02
+    display3(20,28,20,30);//OBJ-03
+    display4(24,24,28,24);//OBJ-04
 
 
     //rotating 3d cube
@@ -1135,39 +1180,9 @@ void display()
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     glFlush();
 }
+//FN-07 // keyboard function
 void keyboard(unsigned char key, int x, int y)
 {
     switch (key)
@@ -1184,6 +1199,10 @@ void keyboard(unsigned char key, int x, int y)
          break;
         case '-':sx -= 0.1; sy -= 0.1;
          break;
+        case '[':hammersx += 0.1; hammersy += 0.1;
+         break;
+        case ']':hammersx -= 0.1; hammersy -= 0.1;
+         break;
         case 'r':angle17 += 5;
          break;
         case 'R':angle17 -= 5; break;
@@ -1198,6 +1217,7 @@ void keyboard(unsigned char key, int x, int y)
             tx=0; ty=0;
             thox=0;
             sx=1; sy=1;
+            hammersx=1;hammersy=1;
             break;
         case 'x': exit(0);
     }
@@ -1225,11 +1245,19 @@ void keyboard(unsigned char key, int x, int y)
             thanosVisible=false;
         }
     }
+    if(thanosVisible==false)
+    {
+        cout<< "YOU WIN!" <<endl;
+    }
+    if(thorVisible==false)
+    {
+        cout<< "YOU LOSE!" <<endl;
+    }
     glutPostRedisplay();
 }
+//FN-08 timer/animated update function
 void update(int value)
 {
-    //rotate cube
     angle16+= 1.5;
     if(angle16 > 360)
     {
@@ -1239,47 +1267,25 @@ void update(int value)
     glutTimerFunc(16,update,0);
 
 }
+//FN-09 initialization function
 void init()
 {
-    glClearColor(0, 0, 0, 0);
-
+    glClearColor(0,0,0,0);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-
-    glOrtho(-30, 30, -30, 30, -30, 30);
-
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-
-    glEnable(GL_DEPTH_TEST);
+    gluOrtho2D(-30,30,-30,30);
 }
-
-
+//FN-10 Main function
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
-
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-
-    glutInitWindowSize(1980, 1080);
+    glutInitDisplayMode(GLUT_DOUBLE|GLUT_DEPTH);
+    glutInitWindowSize(700,700);
     glutCreateWindow("Gaming Arena- 2D/3D Scene");
-
     init();
-
-    //glutDisplayFunc(display_F1);
-    //glutKeyboardFunc(keyboard_F1);
-
     glutDisplayFunc(display);
     glutKeyboardFunc(keyboard);
-
-    //glutTimerFunc(0, updateEnemy_F1, 0);
-    //glutTimerFunc(16, update_F1, 0);
-    //glutTimerFunc(0, updatePower_F1, 0);
-
-
-    glutTimerFunc(16, update, 0);
-
+    glutTimerFunc(0,update,0);
     glutMainLoop();
-
     return 0;
 }
