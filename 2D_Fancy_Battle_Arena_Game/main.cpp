@@ -8,7 +8,7 @@ const char* LEVEL1_EXE_PATH =
     "E:\\Computer Graphics\\Graphics_Project\\Frame01\\bin\\Debug\\Fancy Battle Arena.exe";
 
 const char* LEVEL2_EXE_PATH =
-    "E:\\Computer Graphics\\Graphics_Project\\Frame02\\bin\\Debug\\Frame02.exe";
+    "E:\\Computer Graphics\\Graphics_Project\\Frame02\\bin\\Debug\\fancyArenaFrame2.exe";
 
 const char* LEVEL3_EXE_PATH =
     "E:\\Computer Graphics\\Graphics_Project\\Frame03\\bin\\Debug\\Frame03.exe";
@@ -83,25 +83,25 @@ void mouseClick(int button, int state, int x, int y)
     float fx = ((float)x / (float)winW) * 60.0f - 30.0f;
     float fy = 30.0f - ((float)y / (float)winH) * 60.0f;
 
-    // Level 1 button: x in [-5,5], y in [14,17]
+
     if (fx >= -5.0f && fx <= 5.0f && fy >= 14.0f && fy <= 17.0f)
     {
         launchGame(LEVEL1_EXE_PATH);
     }
 
-    // Level 2 button: x in [-5,5], y in [7,10]
+
     else if (fx >= -5.0f && fx <= 5.0f && fy >= 7.0f && fy <= 10.0f)
     {
         launchGame(LEVEL2_EXE_PATH);
     }
 
-    // Level 3 button: x in [-5,5], y in [0,3]
+
     else if (fx >= -5.0f && fx <= 5.0f && fy >= 0.0f && fy <= 3.0f)
     {
         launchGame(LEVEL3_EXE_PATH);
     }
 
-    // Level 4 button: x in [-5,5], y in [-7,-4]
+
     else if (fx >= -5.0f && fx <= 5.0f && fy >= -7.0f && fy <= -4.0f)
     {
         launchGame(LEVEL4_EXE_PATH);
@@ -109,7 +109,7 @@ void mouseClick(int button, int state, int x, int y)
 }
 
 
-// ===================== Setup =====================
+
 void init()
 {
     glClearColor(0, 0, 0, 0);

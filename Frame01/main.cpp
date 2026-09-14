@@ -58,7 +58,14 @@ bool collision(float x1, float y1, float x2, float y2, float r1, float r2)
     float dx = x1 - x2;
     float dy = y1 - y2;
     float distance = sqrt(dx * dx + dy * dy);
-    return distance <= r1 + r2;
+    if (distance <= r1 + r2)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 void DDA(float x1, float y1, float x2, float y2)
@@ -97,36 +104,33 @@ void DDA(float x1, float y1, float x2, float y2)
 
 }
 
-void drawHp(float x, float y, float chunkWidth, float chunkHeight,
-            float spacing, int totalChunks, int filledChunks,
-            float r, float g, float b)
+void drawHp(float x, float y, int totalSq, int filledSq)
 {
-    glDisable(GL_DEPTH_TEST);
 
-    for (int i = 0; i < filledChunks; i++)
+    for (int i = 0; i < filledSq; i++)
     {
-        float chunkX = x + i * (chunkWidth + spacing);
+        float sqX = x + i * 1.7;
 
-        glColor3f(r, g, b);
+        glColor3f(1, 0.5f, 0);
 
         glBegin(GL_QUADS);
-            glVertex2f(chunkX, y);
-            glVertex2f(chunkX + chunkWidth, y);
-            glVertex2f(chunkX + chunkWidth, y + chunkHeight);
-            glVertex2f(chunkX, y + chunkHeight);
+            glVertex2f(sqX, y);
+            glVertex2f(sqX + 1.4, y);
+            glVertex2f(sqX + 1.4, y + 1.2);
+            glVertex2f(sqX, y + 1.2);
         glEnd();
 
         // border
         glColor3f(0, 0, 0);
         glBegin(GL_LINE_LOOP);
-            glVertex2f(chunkX, y);
-            glVertex2f(chunkX + chunkWidth, y);
-            glVertex2f(chunkX + chunkWidth, y + chunkHeight);
-            glVertex2f(chunkX, y + chunkHeight);
+            glVertex2f(sqX, y);
+            glVertex2f(sqX + 1.4, y);
+            glVertex2f(sqX + 1.4, y + 1.2);
+            glVertex2f(sqX, y + 1.2);
         glEnd();
     }
 
-    glEnable(GL_DEPTH_TEST);
+
 }
 
 
@@ -326,19 +330,22 @@ void tree(float x, float y) {
 
 void Power()
 {
-    if (!powerActive)
+    if (powerActive == false)
         return;
 
     glTranslatef(powerPosX, powerPosY, 0);
 
-    if (powerDirection == "Up")
+    if (powerDirection == "Up") {
         glRotatef(90, 0, 0, 1);
+    }
 
-    else if (powerDirection == "Down")
+    else if (powerDirection == "Down") {
         glRotatef(-90, 0, 0, 1);
+    }
 
-    else if (powerDirection == "Left")
+    else if (powerDirection == "Left") {
         glRotatef(180, 0, 0, 1);
+    }
 
     glColor3f(0.0f, 1.0f, 1.0f);
 
@@ -367,16 +374,8 @@ void Power()
 
     glEnd();
 
-    if (powerDirection == "Up")
-        glRotatef(-90, 0, 0, 1);
+    glLoadIdentity();
 
-    else if (powerDirection == "Down")
-        glRotatef(90, 0, 0, 1);
-
-    else if (powerDirection == "Left")
-        glRotatef(-180, 0, 0, 1);
-
-    glTranslatef(-powerPosX, -powerPosY, 0);
 }
 
 void Player()
@@ -502,14 +501,7 @@ void display()
         return;
     }
 
-    glLoadIdentity();
 
-    int totalChunks = 5;
-    int filledHealthChunks = (int)ceil((playerHealth / playerMaxHealth) * totalChunks);
-    drawHp(15, 27, 1.4, 1.2, 0.3, totalChunks, filledHealthChunks, 0, 1, 0);
-
-    int filledHouseChunks = (int)ceil((houseHealth / houseMaxHealth) * totalChunks);
-    drawHp(15, 24.5, 1.4, 1.2, 0.3, totalChunks, filledHouseChunks, 1, 0.5f, 0);
 
     //fence
     glLoadIdentity();
@@ -598,6 +590,7 @@ void display()
 
 
 
+
     Player();
 
     Power();
@@ -673,6 +666,15 @@ void display()
 
     glEnd();
 
+    glLoadIdentity();
+
+    int totalsqr = 5;
+    int filledHealthSqr = (int)ceil((playerHealth / playerMaxHealth) * totalsqr);
+    drawHp(15, 27,  totalsqr, filledHealthSqr);
+
+    int filledHouseSqr = (int)ceil((houseHealth / houseMaxHealth) * totalsqr);
+    drawHp(15, 24.5, totalsqr, filledHouseSqr);
+
 
     glutSwapBuffers();
 }
@@ -691,17 +693,23 @@ void updatePower(int value)
 
     if (powerActive)
     {
-        if (powerDirection == "Up")
+        if (powerDirection == "Up") {
             powerPosY += powerSpeed;
+        }
 
-        else if (powerDirection == "Down")
+        else if (powerDirection == "Down") {
             powerPosY -= powerSpeed;
+        }
 
         else if (powerDirection == "Left")
+        {
             powerPosX -= powerSpeed;
+        }
 
-        else if (powerDirection == "Right")
+
+        else if (powerDirection == "Right") {
             powerPosX += powerSpeed;
+        }
 
 
         if (enemy1Alive && collision(powerPosX, powerPosY, enemy1X, enemy1Y, powerRadius, enemyRadius))
@@ -798,7 +806,7 @@ int main(int argc, char** argv)
     glutTimerFunc(0, update_cross, 0);
     glutKeyboardFunc(keyboard);
 
-    printf("Mission : Save The House At Any Cost\n");
+    printf("Mission : Save The House At Any Cost\n\n");
 
     printf("Press 'w' to move upward\n");
     printf("Press 'a' to move left\n");
